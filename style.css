@@ -349,12 +349,13 @@ Habilidades
 
 .habilidades {
     margin-top: 50px;
+    text-align: center;
 }
 
 .carta {
     opacity: 0;
-    width: 180px;
-    height: 250px;
+    width: 200px;
+    height: 270px;
     position: absolute;
     transform: translateY(-50px) scale(0.8);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -387,7 +388,9 @@ Habilidades
 }
 
 .carta-back {
-    background: white;
+    background-image: url('https://github.com/osamasgit/portafolio-web/raw/skills/Media/A.png');
+    background-size: 180%;
+    background-position: center;
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -407,8 +410,9 @@ Habilidades
 }
 
 .carta-back li {
-    font-size: 16px;
-    margin: 5px 0;
+    font-size: 12px;
+    margin: 5px 25px;
+    text-align: center;
 }
 
 /* Animación de reparto */
