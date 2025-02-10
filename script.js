@@ -1,18 +1,10 @@
 function repartirCartas() {
     let cartas = document.querySelectorAll('.carta');
-    let container = document.querySelector('.cartas-container');
-    
-    if (!cartas.length || !container) {
-        console.error("No se encontraron cartas o el contenedor.");
-        return;
-    }
-
-    let containerWidth = container.offsetWidth;
-    let spacing = 200; // Espacio entre cartas
-    let centerOffset = (cartas.length - 1) * spacing / 2; // Para centrar las cartas
 
     cartas.forEach((carta, index) => {
         setTimeout(() => {
+            let spacing = 200; // Espacio entre cartas
+            let centerOffset = (cartas.length - 1) * spacing / 2; // Centrar las cartas
             let offsetX = index * spacing - centerOffset; // Ajustar la posición
 
             carta.style.opacity = "1";
@@ -24,7 +16,18 @@ function repartirCartas() {
         cartas.forEach((carta) => {
             carta.classList.add('voltear');
         });
-    }, cartas.length * 200 + 500); // Asegurar que todas se repartan antes de voltear
+    }, 800);
 }
 
-window.onload = repartirCartas; // Llamar a la función cuando cargue la página
+// 👉 Detectamos cuando la sección es visible
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            repartirCartas();
+            observer.disconnect(); // Desactiva el observador para que no se repita
+        }
+    });
+}, { threshold: 0.5 }); // Se activa cuando el 50% de la sección es visible
+
+// 👉 Aplicamos el observador a la sección de cartas
+observer.observe(document.querySelector('.cartas-container'));
